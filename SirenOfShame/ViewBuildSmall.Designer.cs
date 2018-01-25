@@ -123,7 +123,7 @@
             this._when,
             this._toolStripSeparator1});
             this._buildMenu.Name = "_buildMenu";
-            this._buildMenu.Size = new System.Drawing.Size(163, 76);
+            this._buildMenu.Size = new System.Drawing.Size(164, 76);
             this._buildMenu.Text = "BuildMenu";
             this._buildMenu.Opening += new System.ComponentModel.CancelEventHandler(this.BuildMenuOpening);
             // 
@@ -132,27 +132,27 @@
             this._affectsTrayIcon.Checked = true;
             this._affectsTrayIcon.CheckState = System.Windows.Forms.CheckState.Checked;
             this._affectsTrayIcon.Name = "_affectsTrayIcon";
-            this._affectsTrayIcon.Size = new System.Drawing.Size(162, 22);
+            this._affectsTrayIcon.Size = new System.Drawing.Size(163, 22);
             this._affectsTrayIcon.Text = "Affects Tray Icon";
             this._affectsTrayIcon.Click += new System.EventHandler(this.AffectsTrayIconClick);
             // 
             // _stopWatching
             // 
             this._stopWatching.Name = "_stopWatching";
-            this._stopWatching.Size = new System.Drawing.Size(162, 22);
+            this._stopWatching.Size = new System.Drawing.Size(163, 22);
             this._stopWatching.Text = "Stop Watching";
             this._stopWatching.Click += new System.EventHandler(this.StopWatchingClick);
             // 
             // _when
             // 
             this._when.Name = "_when";
-            this._when.Size = new System.Drawing.Size(162, 22);
+            this._when.Size = new System.Drawing.Size(163, 22);
             this._when.Text = "When";
             // 
             // _toolStripSeparator1
             // 
             this._toolStripSeparator1.Name = "_toolStripSeparator1";
-            this._toolStripSeparator1.Size = new System.Drawing.Size(159, 6);
+            this._toolStripSeparator1.Size = new System.Drawing.Size(160, 6);
             // 
             // _buildStatusIcon
             // 

@@ -46,6 +46,7 @@
             this._collection = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this._ignoreEmptyCommentsInXamlBuilds = new System.Windows.Forms.CheckBox();
+            this._vstsLink = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this._checkAll)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._search)).BeginInit();
             this.SuspendLayout();
@@ -223,6 +224,19 @@
             this._ignoreEmptyCommentsInXamlBuilds.TabIndex = 63;
             this._ignoreEmptyCommentsInXamlBuilds.Text = "Ignore empty comments in XAML builds";
             this._ignoreEmptyCommentsInXamlBuilds.UseVisualStyleBackColor = true;
+            // _vstsLink
+            // 
+            this._vstsLink.ActiveLinkColor = System.Drawing.Color.White;
+            this._vstsLink.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this._vstsLink.AutoSize = true;
+            this._vstsLink.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this._vstsLink.Location = new System.Drawing.Point(396, 59);
+            this._vstsLink.Name = "_vstsLink";
+            this._vstsLink.Size = new System.Drawing.Size(73, 13);
+            this._vstsLink.TabIndex = 63;
+            this._vstsLink.TabStop = true;
+            this._vstsLink.Text = "Info On VSTS";
+            this._vstsLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this._vstsLink_LinkClicked);
             // 
             // ConfigureTfsRest
             // 
@@ -230,6 +244,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
             this.Controls.Add(this._ignoreEmptyCommentsInXamlBuilds);
+            this.Controls.Add(this._vstsLink);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this._collection);
@@ -274,5 +289,6 @@
         private System.Windows.Forms.TextBox _collection;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.CheckBox _ignoreEmptyCommentsInXamlBuilds;
+        private System.Windows.Forms.LinkLabel _vstsLink;
     }
 }

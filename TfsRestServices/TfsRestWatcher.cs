@@ -13,7 +13,7 @@ namespace TfsRestServices
     public class TfsRestWatcher : WatcherBase
     {
         private readonly TfsRestCiEntryPoint _tfsRestCiEntryPoint;
-        private readonly TfsRestService _service;
+        protected TfsRestService _service;
 
         public TfsRestWatcher(SirenOfShameSettings settings, TfsRestCiEntryPoint tfsRestCiEntryPoint) : base(settings)
         {
@@ -34,17 +34,18 @@ namespace TfsRestServices
             }
             catch (AggregateException ex)
             {
+                var anyInvalidCredentials = ex.InnerExceptions.Any(IsInvalidCredentials);
+                if (anyInvalidCredentials)
+                {
+                    throw new InvalidCredentialsException();
+                }
+
                 var anyServerUnavailable = ex.InnerExceptions.Any(IsServerUnavailable);
                 if (anyServerUnavailable)
                 {
                     throw new ServerUnavailableException();
                 }
 
-                var taskCancelledException = ex.InnerExceptions.FirstOrDefault(x => x is TaskCanceledException);
-                if (!ReferenceEquals(null, taskCancelledException))
-                {
-                    throw taskCancelledException;
-                }
                 throw;
             }
             catch (WebException ex)
@@ -58,13 +59,22 @@ namespace TfsRestServices
             }
         }
 
+        private static bool IsInvalidCredentials(Exception ex)
+        {
+            if (ex is HttpRequestException httpRequestException)
+            {
+                return httpRequestException.Message.Contains("401");
+            }
+            return false;
+        }
+
         private static bool IsServerUnavailable(Exception ex)
         {
-            var webException = ex as WebException;
-            if (webException != null)
+            if (ex is TaskCanceledException)
+                return true;
+            if (ex is WebException webException)
                 return IsServerUnavailable(webException);
-            var httpRequestException = ex as HttpRequestException;
-            if (httpRequestException != null)
+            if (ex is HttpRequestException httpRequestException)
                 return IsServerUnavailable(httpRequestException);
             // SocketException?
             return false;
@@ -84,7 +94,7 @@ namespace TfsRestServices
                    ex.Message.Contains("Unable to connect to the remote server");
         }
 
-        private IEnumerable<BuildDefinitionSetting> GetAllWatchedBuildDefinitions()
+        protected virtual IEnumerable<BuildDefinitionSetting> GetAllWatchedBuildDefinitions()
         {
             var activeBuildDefinitionSettings = CiEntryPointSetting.BuildDefinitionSettings.Where(bd => bd.Active && bd.BuildServer == _tfsRestCiEntryPoint.Name);
             return activeBuildDefinitionSettings;
