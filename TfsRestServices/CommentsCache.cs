@@ -24,7 +24,7 @@ namespace TfsRestServices
         {
             var buildDefinitionId = tfsJsonBuild.Definition.Id;
             var buildId = tfsJsonBuild.Id;
-            var comment = await getCommentFunc(tfsJsonBuild);
+            var comment = await getCommentFunc(tfsJsonBuild); // comment is null here
             _commentsCache[buildDefinitionId] = new Tuple<int, string>(buildId, comment);
         }
 

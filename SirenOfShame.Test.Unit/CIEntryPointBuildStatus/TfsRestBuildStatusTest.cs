@@ -78,6 +78,15 @@ namespace SirenOfShame.Test.Unit.CIEntryPointBuildStatus
         }
 
         [Test]
+        public void Null_comments_are_handled_ok()
+        {
+            var commentsCache = new CommentsCache();
+            var tfsJsonBuilds = GetTfsJsonBuilds(1, 2);
+            commentsCache.FetchNewComments(tfsJsonBuilds, new TfsConnectionDetails(), GetCommentFunc(null)).Wait();
+            Assert.AreEqual(null, commentsCache.GetCachedCommentForBuild(tfsJsonBuilds[0]));
+        }
+
+        [Test]
         public void GivenATraditionalXmlBuildDefinition_WhenWeParseIt_ThenWeParseItCorrectly()
         {
             var tfsRestWorkingBuild = ResourceManager.TfsRestBuildDefinitions1;
